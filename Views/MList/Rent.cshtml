@@ -1,0 +1,35 @@
+﻿@model MovieRental_WebSystem.Models.Movie
+
+@{
+    ViewData["Title"] = "Rent";
+}
+
+<h1>Rent</h1>
+
+<h4>Movie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+     <form asp-action="Rent" method="post" onsubmit="this.querySelector('button').disabled = true;">
+    <div class="form-group">
+        <label for="code">Movie Code</label>
+        <input type="number" name="code" class="form-control" placeholder="Enter movie code" required />
+    </div>
+    <div class="form-group">
+        <label for="customerEmail">Customer Email</label>
+        <input type="email" name="customerEmail" class="form-control" placeholder="Enter customer email" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Rent Movie</button>
+</form>
+
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
