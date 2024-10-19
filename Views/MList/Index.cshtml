@@ -34,35 +34,43 @@
         </tr>
     </thead>
     <tbody>
- @if (Model != null)
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsRented)
-            </td>
-            <td>
-               @Html.ActionLink("Rent", "Rent", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-           
-        </tr>
-              
-}
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @if (item.IsRented)
+                        {
+                            <span class="text-success">Rented</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">Available</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { code = item.Code }) |
+                        @Html.ActionLink("Details", "Details", new { code = item.Code }) |
+                        @Html.ActionLink("Delete", "Delete", new { title = item.Title })
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>

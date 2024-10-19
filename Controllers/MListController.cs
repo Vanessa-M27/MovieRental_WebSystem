@@ -59,45 +59,30 @@ namespace MovieRental_WebSystem.Controllers
         }
 
         // GET: AccountController/Edit/5
-        public ActionResult Rent (int id)
+        public ActionResult Edit(int id)
         {
             return View();
         }
 
         // POST: AccountController/Edit/5
-        // POST: MListController/Rent
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Rent(int code, string customerEmail)
+        [HttpPost] 
+        public async Task<ActionResult> Edit(int code, string customerEmail)
         {
-            if (code == 0)
+            string apiUrl = $"https://localhost:7099/OwnerAPI/RentMovie?MovieCode={code}&customerEmail={customerEmail}";
+
+            using (HttpClient client = new HttpClient())
             {
+               
+                HttpResponseMessage response = await client.PatchAsync(apiUrl, null);
 
-
-
-                string apiUrl = "https://localhost:7099/OwnerAPI/RentMovie";
-                using (HttpClient client = new HttpClient())
+                if (response.IsSuccessStatusCode)
                 {
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(code), Encoding.UTF8, "application/json");
-
-                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
+                    return RedirectToAction(nameof(Index)); 
                 }
-
             }
-            else
-            {
-
-            }
-
-
-
-            return View(code);
+            return View(new { Code = code, CustomerEmail = customerEmail });
         }
+
 
         // GET: MListController/Delete/5
         public ActionResult Delete(int id)
@@ -113,19 +98,14 @@ namespace MovieRental_WebSystem.Controllers
 
                 using (HttpClient client = new HttpClient())
                 {
-                    // Send the DELETE request to the API, passing the title in the query string
                     HttpResponseMessage response = await client.DeleteAsync(apiUrl);
 
                     if (response.IsSuccessStatusCode)
                     {
-                        TempData["SuccessMessage"] = $"Movie '{title}' deleted successfully!";
-                    }
-                    else
-                    {
-                        TempData["ErrorMessage"] = $"Failed to delete the movie '{title}'.";
-                    }
+                       return RedirectToAction(nameof(Index));
                 }
-            return RedirectToAction(nameof(Index));
+                }
+            return View(title);
         }
 
 
