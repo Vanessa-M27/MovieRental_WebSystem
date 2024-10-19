@@ -1,0 +1,17 @@
+﻿@model IEnumerable<MovieRental_WebSystem.Models.HarryPotterCharacter>
+
+@{
+    ViewData["Title"] = "Harry Potter Characters";
+}
+
+<h2>Harry Potter Characters</h2>
+
+<ul>
+    @foreach (var character in Model)
+    {
+        <li>
+            <strong>@character.Name</strong> - House: @character.House
+            <a href="@Url.Action("Details", new { id = character.Id })">Details</a>
+        </li>
+    }
+</ul>
