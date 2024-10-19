@@ -11,17 +11,16 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit" method="post">
-            <!-- Use POST to match the controller -->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <!-- Movie Code -->
+            
             <div class="form-group">
                 <label asp-for="Code" class="control-label">Movie Code</label>
                 <input asp-for="Code" class="form-control" />
                 <span asp-validation-for="Code" class="text-danger"></span>
             </div>
 
-            <!-- Customer Email -->
+            
             <div class="form-group">
                 <label for="customerEmail" class="control-label">Customer Email</label>
                 <input type="email" name="customerEmail" class="form-control" />
