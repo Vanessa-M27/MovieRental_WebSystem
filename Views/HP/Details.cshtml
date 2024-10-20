@@ -1,7 +1,14 @@
 ﻿@model MovieRental_WebSystem.Models.HarryPotterCharacter
 
 <h2>@Model.Name</h2>
-<img src="@Model.Image" alt="@Model.Name" />
+
+<div>
+    <img src="@Model.Image" alt="@Model.Name" style="width:200px; height:auto;" />
+</div>
+
 <p><strong>House:</strong> @Model.House</p>
 <p><strong>Patronus:</strong> @Model.Patronus</p>
 <p><strong>Actor:</strong> @Model.Actor</p>
+<p><strong>ID:</strong> @Model.Id</p>
+
+<a href="@Url.Action("Index", "HP")">Back to List</a>

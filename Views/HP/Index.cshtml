@@ -5,13 +5,24 @@
 }
 
 <h2>Harry Potter Characters</h2>
-
-<ul>
-    @foreach (var character in Model)
-    {
-        <li>
-            <strong>@character.Name</strong> - House: @character.House
-            <a href="@Url.Action("Details", new { id = character.Id })">Details</a>
-        </li>
-    }
-</ul>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>House</th>
+            <th></th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var character in Model)
+        {
+            <tr>
+                <td>@character.Name</td>
+                <td>@character.House</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@character.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
